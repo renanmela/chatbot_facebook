@@ -18,7 +18,7 @@ import ch.qos.logback.classic.Logger;
 @RequestMapping("webhook")
 public class WebHook {
 	private final String PAGE_TOKEN = "EAAKIOzAzo9ABAEQorkt0PFxE42qBYuVWw5MK7tjTjsB2SKcfAleQqCQ0AZC4Sb0zyBT5TOeqD6LNqWVkLEtJYT4MekCovMcrPqaaNNRZCWmob2mOkOGoNAHvz6zLcrPb4E8IePF0Wo5AN3elXNLD5ggRB0ub2x2eh0O6u92beoYAf6YQKr2gEZCKQW8kDMZD";
-	private final String VERIFY_TOKEN = "A_SECRET_VERIFY_TOKEN";
+	private final String VERIFY_TOKEN = "xyz";
 	// this is for reply messages
 	private final String FB_MSG_URL = "https://graph.facebook.com/v2.6/me/messages?access_token=" + PAGE_TOKEN;
 
