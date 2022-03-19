@@ -42,13 +42,13 @@ public class WebHook {
 	@PostMapping
 	@ResponseStatus(HttpStatus.OK)
 	public void post(@RequestBody FacebookHookRequest request) {
-		logger.info("Qual a sua idade?", request);
-		request.getEntry().forEach(e -> {
-			e.getMessaging().forEach(m -> {
-				String id = m.getSender().get("id");
-				sendReply(id, "23 anos");
-			});
-		});
+		logger.info("Message result: {}", request);
+		FacebookEntry e = new FacebookEntry();
+		e = request.getEntry().get(request.getEntry().size()-1);
+		if(e.getMessaging().get(e.getMessaging().size()-1).getMessage().getText() == "Qual a sua idade?") {
+			String id = e.getMessaging().get(e.getMessaging().size()-1).getSender().get("id");
+			sendReply(id, "23 anos");
+		}
 	}
 
 	private void sendReply(String id, String text) {

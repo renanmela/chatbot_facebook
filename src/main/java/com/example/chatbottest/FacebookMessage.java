@@ -15,4 +15,7 @@ public class FacebookMessage implements Serializable {
     private String mid;
     private String text;
     private Long seq;
+	public String getText() {
+		return text;
+	}
 }
