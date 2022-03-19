@@ -46,7 +46,8 @@ public class WebHook {
 		request.getEntry().forEach(e->{
             e.getMessaging().forEach(m->{
                 String id = m.getSender().get("id");
-                String message = m.getRecipient().get("id");
+                String message = m.getMessage().getText();
+                System.out.println(message);
                 if(message == "Qual a sua idade?"){
                 	sendReply(id,"23 anos");
                 }else sendReply(id,"Nao deu certo");
