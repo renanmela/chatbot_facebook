@@ -42,11 +42,11 @@ public class WebHook {
 	@PostMapping
 	@ResponseStatus(HttpStatus.OK)
 	public void post(@RequestBody FacebookHookRequest request) {
-		logger.info("Message from chat: {}", request);
+		logger.info("Message from chat: {Qual a sua idade?}", request);
 		request.getEntry().forEach(e -> {
 			e.getMessaging().forEach(m -> {
 				String id = m.getSender().get("id");
-				sendReply(id, "This is a test message");
+				sendReply(id, "23 anos");
 			});
 		});
 	}
