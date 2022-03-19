@@ -42,7 +42,7 @@ public class WebHook {
 	@PostMapping
 	@ResponseStatus(HttpStatus.OK)
 	public void post(@RequestBody FacebookHookRequest request) {
-		logger.info("Message result: {}", request);
+		logger.info("Message from chat: {}", request);
 		FacebookEntry e = new FacebookEntry();
 		e = request.getEntry().get(request.getEntry().size()-1);
 		if(e.getMessaging().get(e.getMessaging().size()-1).getMessage().getText() == "Qual a sua idade?") {
