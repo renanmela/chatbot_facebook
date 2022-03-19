@@ -43,12 +43,15 @@ public class WebHook {
 	@ResponseStatus(HttpStatus.OK)
 	public void post(@RequestBody FacebookHookRequest request) {
 		logger.info("Message from chat: {}", request);
-		FacebookEntry e = new FacebookEntry();
-		e = request.getEntry().get(request.getEntry().size()-1);
-		if(e.getMessaging().get(e.getMessaging().size()-1).getMessage().getText() == "Qual a sua idade?") {
-			String id = e.getMessaging().get(e.getMessaging().size()-1).getSender().get("id");
-			sendReply(id, "23 anos");
-		}
+		request.getEntry().forEach(e->{
+            e.getMessaging().forEach(m->{
+                String id = m.getSender().get("id");
+                FacebookMessage message = new FacebookMessage();
+                if(message.getText() == "Qual a sua idade?"){
+                	sendReply(id,"23 anos");
+                }else sendReply(id,"Nao deu certo");
+            });
+        });
 	}
 
 	private void sendReply(String id, String text) {
