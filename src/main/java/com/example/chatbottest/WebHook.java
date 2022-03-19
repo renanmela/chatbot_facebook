@@ -46,8 +46,8 @@ public class WebHook {
 		request.getEntry().forEach(e->{
             e.getMessaging().forEach(m->{
                 String id = m.getSender().get("id");
-                FacebookMessage message = new FacebookMessage();
-                if(message.getText() == "Qual a sua idade?"){
+                String message = m.getRecipient().get("id");
+                if(message == "Qual a sua idade?"){
                 	sendReply(id,"23 anos");
                 }else sendReply(id,"Nao deu certo");
             });

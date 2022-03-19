@@ -27,6 +27,9 @@ public class FacebookMessaging implements Serializable {
 	public FacebookMessage getMessage() {
 		return message;
 	}
+	public Map<String,String> getRecipient() {
+		return recipient;
+	}
     
     
 }
