@@ -47,13 +47,19 @@ public class WebHook {
             e.getMessaging().forEach(m->{
                 String id = m.getSender().get("id");
                 String message = m.getMessage().getText();
-                switch (message) {
-                case "Qual a sua idade?":
+                switch (message.toLowerCase()) {
+                case "oi":
+                	sendReply(id,"Ola!");
+                	break;
+                case "ola":
+                	sendReply(id,"Oiee!");
+                	break;
+                case "qual a sua idade?":
                 	sendReply(id,"23 anos");
-                  break;
-                case "Qual o seu nome?":
+                	break;
+                case "qual o seu nome?":
                 	sendReply(id,"Renan");
-                    break;
+                	break;
                 default: sendReply(id, "Não entendi, pode repetir por favor?");
                 }
             });
