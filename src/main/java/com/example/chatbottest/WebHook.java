@@ -49,7 +49,7 @@ public class WebHook {
                 String message = m.getMessage().getText();
                 if(message == "Qual a sua idade?"){
                 	sendReply(id,"23 anos");
-                }else sendReply(id,"Nao deu certo");
+                }else sendReply(id, message);
             });
         });
 	}
