@@ -54,7 +54,7 @@ public class WebHook {
                 case "Qual o seu nome?":
                 	sendReply(id,"Renan");
                     break;
-                default: sendReply(id, message);
+                default: sendReply(id, "Não entendi, pode repetir por favor?");
                 }
             });
         });
