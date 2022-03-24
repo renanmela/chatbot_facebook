@@ -44,10 +44,10 @@ public class WebHook {
 			e.getMessaging().forEach(m -> {
 				String id = m.getSender().get("id");
 				String message = m.getMessage().getText();
+				if(message.contains("idade")){
+					this.sendReply(id, "Tenho 23 anos");
+				}else
 				switch( message.toLowerCase()) {
-					case "qual a sua idade?":
-						this.sendReply(id, "23 anos");
-						break;
 					case "qual o seu nome?":
 						this.sendReply(id, "Renan");
 						break;
