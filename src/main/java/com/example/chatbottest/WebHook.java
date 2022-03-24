@@ -51,7 +51,7 @@ public class WebHook {
 					this.sendReply(id, "Renan");
 				}
 				else if(message.contains("oi") || message.contains("ola") || message.contains("esta ai")){
-					this.sendReply(id, "Renan");
+					this.sendReply(id, "Ola!");
 				}
 				else this.sendReply(id, "Não entendi sua mensagem, pode tentar de outra maneira?");
 			});
