@@ -18,13 +18,10 @@ import ch.qos.logback.classic.Logger;
 @RequestMapping("webhook")
 
 public class WebHook {
-	private final String PAGE_TOKEN = "THIS_IS_THE_TOKEN_YOU_COPIED_BEFORE";
-	private final String VERIFY_TOKEN = "A_SECRET_VERIFY_TOKEN";
-	// this is for reply messages
-	private final String FB_MSG_URL = "https://graph.facebook.com/v2.6/me/messages?access_token=" + PAGE_TOKEN;
-
-	// logger to watch whats happening in our bot
-	private final Logger logger = (Logger) LoggerFactory.getLogger(WebHook.class);
+	private final String PAGE_TOKEN = "EAAKIOzAzo9ABAEQorkt0PFxE42qBYuVWw5MK7tjTjsB2SKcfAleQqCQ0AZC4Sb0zyBT5TOeqD6LNqWVkLEtJYT4MekCovMcrPqaaNNRZCWmob2mOkOGoNAHvz6zLcrPb4E8IePF0Wo5AN3elXNLD5ggRB0ub2x2eh0O6u92beoYAf6YQKr2gEZCKQW8kDMZD";
+	private final String VERIFY_TOKEN = "xyz";
+	private final String FB_MSG_URL = "https://graph.facebook.com/v2.6/me/messages?access_token=EAAKIOzAzo9ABAEQorkt0PFxE42qBYuVWw5MK7tjTjsB2SKcfAleQqCQ0AZC4Sb0zyBT5TOeqD6LNqWVkLEtJYT4MekCovMcrPqaaNNRZCWmob2mOkOGoNAHvz6zLcrPb4E8IePF0Wo5AN3elXNLD5ggRB0ub2x2eh0O6u92beoYAf6YQKr2gEZCKQW8kDMZD";
+	private final Logger logger = (Logger)LoggerFactory.getLogger(WebHook.class);
 	private final RestTemplate template = new RestTemplate();
 
 	// This is necessary for register a webhook in facebook
@@ -47,7 +44,23 @@ public class WebHook {
 		request.getEntry().forEach(e -> {
 			e.getMessaging().forEach(m -> {
 				String id = m.getSender().get("id");
-				sendReply(id, "This is a test message");
+				String message = m.getMessage().getText();
+				switch( message.toLowerCase()) {
+					case "qual a sua idade?":
+						this.sendReply(id, "23 anos");
+						break;
+					case "qual o seu nome?":
+						this.sendReply(id, "Renan");
+						break;
+					case "oi":
+						this.sendReply(id, "Ola!");
+						break;
+					case "ola":
+						this.sendReply(id, "Oiee!");
+						break;
+					default:
+						this.sendReply(id, "Não entendi, pode repetir por favor?");
+				}
 			});
 		});
 	}
