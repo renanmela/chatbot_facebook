@@ -43,23 +43,17 @@ public class WebHook {
 		request.getEntry().forEach(e -> {
 			e.getMessaging().forEach(m -> {
 				String id = m.getSender().get("id");
-				String message = m.getMessage().getText();
-				if(message.contains("idade")){
+				String message = m.getMessage().getText().toLowerCase();
+				if(message.contains("idade") || message.contains("anos")){
 					this.sendReply(id, "Tenho 23 anos");
-				}else
-				switch( message.toLowerCase()) {
-					case "qual o seu nome?":
-						this.sendReply(id, "Renan");
-						break;
-					case "oi":
-						this.sendReply(id, "Ola!");
-						break;
-					case "ola":
-						this.sendReply(id, "Oiee!");
-						break;
-					default:
-						this.sendReply(id, "Não entendi, pode repetir por favor?");
 				}
+				else if(message.contains("seu nome") || message.contains("se chama") || message.contains("seu apelido")){
+					this.sendReply(id, "Renan");
+				}
+				else if(message.contains("oi") || message.contains("ola") || message.contains("esta ai")){
+					this.sendReply(id, "Renan");
+				}
+				else this.sendReply(id, "Não entendi sua mensagem, pode tentar de outra maneira?");
 			});
 		});
 	}
