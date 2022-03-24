@@ -19,7 +19,7 @@ import ch.qos.logback.classic.Logger;
 public class WebHook {
 	private final String PAGE_TOKEN = "EAAKIOzAzo9ABAEQorkt0PFxE42qBYuVWw5MK7tjTjsB2SKcfAleQqCQ0AZC4Sb0zyBT5TOeqD6LNqWVkLEtJYT4MekCovMcrPqaaNNRZCWmob2mOkOGoNAHvz6zLcrPb4E8IePF0Wo5AN3elXNLD5ggRB0ub2x2eh0O6u92beoYAf6YQKr2gEZCKQW8kDMZD";
 	private final String VERIFY_TOKEN = "xyz";
-	private final String FB_MSG_URL = "https://graph.facebook.com/v2.6/me/messages?access_token=EAAKIOzAzo9ABAEQorkt0PFxE42qBYuVWw5MK7tjTjsB2SKcfAleQqCQ0AZC4Sb0zyBT5TOeqD6LNqWVkLEtJYT4MekCovMcrPqaaNNRZCWmob2mOkOGoNAHvz6zLcrPb4E8IePF0Wo5AN3elXNLD5ggRB0ub2x2eh0O6u92beoYAf6YQKr2gEZCKQW8kDMZD";
+	private final String FB_MSG_URL="https://graph.facebook.com/v2.6/me/messages?access_token=" + PAGE_TOKEN;
 	private final Logger logger = (Logger)LoggerFactory.getLogger(WebHook.class);
 	private final RestTemplate template = new RestTemplate();
 
