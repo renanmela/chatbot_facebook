@@ -16,7 +16,6 @@ import ch.qos.logback.classic.Logger;
 
 @RestController()
 @RequestMapping("webhook")
-
 public class WebHook {
 	private final String PAGE_TOKEN = "EAAKIOzAzo9ABAEQorkt0PFxE42qBYuVWw5MK7tjTjsB2SKcfAleQqCQ0AZC4Sb0zyBT5TOeqD6LNqWVkLEtJYT4MekCovMcrPqaaNNRZCWmob2mOkOGoNAHvz6zLcrPb4E8IePF0Wo5AN3elXNLD5ggRB0ub2x2eh0O6u92beoYAf6YQKr2gEZCKQW8kDMZD";
 	private final String VERIFY_TOKEN = "xyz";
