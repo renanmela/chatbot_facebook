@@ -35,15 +35,15 @@ public class WebHook {
 			for (FacebookMessaging m : e.getMessaging()) {
 				String id = m.getSender().get("id");
 				String message = m.getMessage().getText();
-				FindMatcher fm = new FindMatcher();
+				FindMatcher findMatcher = new FindMatcher();
 				Regex regex = new Regex();
-				if (fm.findMatcher(message, regex.getIdade())) {
+				if (findMatcher.findMatcher(message, regex.getIdade())) {
 					this.sendReply(id, "Tenho 23 anos");
 				}
-				else if (fm.findMatcher(message, regex.getNome())){
+				else if (findMatcher.findMatcher(message, regex.getNome())){
 					this.sendReply(id, "Renan");
 				}
-				else if (fm.findMatcher(message, regex.getOi())){
+				else if (findMatcher.findMatcher(message, regex.getOi())){
 					this.sendReply(id, "Ola!");
 				}
 				else this.sendReply(id, "Não entendi sua mensagem, pode tentar de outra maneira?");
