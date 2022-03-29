@@ -14,6 +14,9 @@ import org.springframework.web.client.RestTemplate;
 
 import ch.qos.logback.classic.Logger;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 @RestController()
 @RequestMapping("webhook")
 public class WebHook {
@@ -42,10 +45,11 @@ public class WebHook {
 			e.getMessaging().forEach(m -> {
 				String id = m.getSender().get("id");
 				String message = m.getMessage().getText().toLowerCase();
+				Matcher matcherNome = Pattern.compile("(?i)seu nome|(?i)voc[eê]\\sse\\schama|(?i)nome\\s(tem\\s)voc[eê]|(?i)nome\\svoc[eê]\\stem").matcher(message);
 				if(message.matches("(?i)sua idade|(?i)(voc[eê] tem).*idade|(?i)idade.*(voc[eê] tem)|(?i)(voc[eê] tem).*anos|(?i)anos.*(tem voc[eê])|(?i)anos.*(voc[eê] tem)")){
 					this.sendReply(id, "Tenho 23 anos");
 				}
-				else if(message.matches("(?i)seu nome|(?i)voc[eê]\\sse\\schama|(?i)nome\\s(tem\\s)voc[eê]|(?i)nome\\svoc[eê]\\stem")){
+				else if(matcherNome.find()){
 					this.sendReply(id, "Renan");
 				}
 				else if(message.matches("(?i)oi|(?i)ol[aá]|(?i)esta\\sai?")){
