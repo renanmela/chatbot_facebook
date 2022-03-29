@@ -1,19 +1,9 @@
 package com.example.chatbottest;
 
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-
-import ch.qos.logback.classic.Logger;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,25 +31,24 @@ public class WebHook {
 	@PostMapping
 	@ResponseStatus(HttpStatus.OK)
 	public void post(@RequestBody FacebookHookRequest request) {
-		request.getEntry().forEach(e -> {
-			e.getMessaging().forEach(m -> {
+		for (FacebookEntry e : request.getEntry()) {
+			for (FacebookMessaging m : e.getMessaging()) {
 				String id = m.getSender().get("id");
-				String message = m.getMessage().getText().toLowerCase();
-				Matcher matcherIdade = Pattern.compile("(?i)sua idade|(?i)(voc[eê] tem).*idade|(?i)idade.*(voc[eê] tem)|(?i)(voc[eê] tem).*anos|(?i)anos.*(tem voc[eê])|(?i)anos.*(voc[eê] tem)").matcher(message);
-				Matcher matcherNome = Pattern.compile("(?i)seu nome|(?i)voc[eê]\\sse\\schama|(?i)nome\\s(tem\\s)voc[eê]|(?i)nome\\svoc[eê]\\stem").matcher(message);
-				Matcher matcherOi = Pattern.compile("(?i)oi|(?i)ol[aá]|(?i)esta\\sai?").matcher(message);
-				if(matcherIdade.find()){
+				String message = m.getMessage().getText();
+				FindMatcher fm = new FindMatcher();
+				Regex regex = new Regex();
+				if (fm.findMatcher(message, regex.getIdade())) {
 					this.sendReply(id, "Tenho 23 anos");
 				}
-				else if(matcherNome.find()){
+				else if (fm.findMatcher(message, regex.getNome())){
 					this.sendReply(id, "Renan");
 				}
-				else if(matcherOi.find()){
+				else if (fm.findMatcher(message, regex.getOi())){
 					this.sendReply(id, "Ola!");
 				}
 				else this.sendReply(id, "Não entendi sua mensagem, pode tentar de outra maneira?");
-			});
-		});
+			}
+		}
 	}
 
 	private void sendReply(String id, String text) {
