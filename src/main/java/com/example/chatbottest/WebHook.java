@@ -45,14 +45,16 @@ public class WebHook {
 			e.getMessaging().forEach(m -> {
 				String id = m.getSender().get("id");
 				String message = m.getMessage().getText().toLowerCase();
+				Matcher matcherIdade = Pattern.compile("(?i)sua idade|(?i)(voc[eê] tem).*idade|(?i)idade.*(voc[eê] tem)|(?i)(voc[eê] tem).*anos|(?i)anos.*(tem voc[eê])|(?i)anos.*(voc[eê] tem)").matcher(message);
 				Matcher matcherNome = Pattern.compile("(?i)seu nome|(?i)voc[eê]\\sse\\schama|(?i)nome\\s(tem\\s)voc[eê]|(?i)nome\\svoc[eê]\\stem").matcher(message);
-				if(message.matches("(?i)sua idade|(?i)(voc[eê] tem).*idade|(?i)idade.*(voc[eê] tem)|(?i)(voc[eê] tem).*anos|(?i)anos.*(tem voc[eê])|(?i)anos.*(voc[eê] tem)")){
+				Matcher matcherOi = Pattern.compile("(?i)oi|(?i)ol[aá]|(?i)esta\\sai?").matcher(message);
+				if(matcherIdade.find()){
 					this.sendReply(id, "Tenho 23 anos");
 				}
 				else if(matcherNome.find()){
 					this.sendReply(id, "Renan");
 				}
-				else if(message.matches("(?i)oi|(?i)ol[aá]|(?i)esta\\sai?")){
+				else if(matcherOi.find()){
 					this.sendReply(id, "Ola!");
 				}
 				else this.sendReply(id, "Não entendi sua mensagem, pode tentar de outra maneira?");
