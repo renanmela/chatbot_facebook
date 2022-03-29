@@ -20,7 +20,6 @@ public class WebHook {
 	private final String PAGE_TOKEN = "EAAKIOzAzo9ABAKvldf1aqOdV0blXvhkM7m3sQxqMEbnRnL6nCnTZBSOQ5QJjkHZBA9wlWZAfVm3QZAEkn3uXd5wZAFLUZCA6m0R4UciBhvIL87wZCkzlLNmhqT7znyR9Si9jyoDsb783rRxswLmWZCZC4stnJUdpvlpFZArYOsHprXyFfcw2TrGtyGe8TUg7jaSt0ZD";
 	private final String VERIFY_TOKEN = "xyz";
 	private final String FB_MSG_URL="https://graph.facebook.com/v2.6/me/messages?access_token=" + PAGE_TOKEN;
-	private final Logger logger = (Logger)LoggerFactory.getLogger(WebHook.class);
 	private final RestTemplate template = new RestTemplate();
 
 	// This is necessary for register a webhook in facebook
@@ -39,18 +38,17 @@ public class WebHook {
 	@PostMapping
 	@ResponseStatus(HttpStatus.OK)
 	public void post(@RequestBody FacebookHookRequest request) {
-		logger.info("Message from chat: {}", request);
 		request.getEntry().forEach(e -> {
 			e.getMessaging().forEach(m -> {
 				String id = m.getSender().get("id");
 				String message = m.getMessage().getText().toLowerCase();
-				if(message.contains("idade") || message.contains("anos")){
+				if(message.matches("(?i)sua idade|(?i)(voc[eê] tem).*idade|(?i)idade.*(voc[eê] tem)|(?i)(voc[eê] tem).*anos|(?i)anos.*(tem voc[eê])|(?i)anos.*(voc[eê] tem)")){
 					this.sendReply(id, "Tenho 23 anos");
 				}
-				else if(message.contains("seu nome") || message.contains("se chama") || message.contains("seu apelido")){
+				else if(message.matches("(?i)seu nome|(?i)voc[eê]\\sse\\schama|(?i)nome\\s(tem\\s)voc[eê]|(?i)nome\\svoc[eê]\\stem")){
 					this.sendReply(id, "Renan");
 				}
-				else if(message.contains("oi") || message.contains("ola") || message.contains("esta ai")){
+				else if(message.matches("(?i)oi|(?i)ol[aá]|(?i)esta\\sai?")){
 					this.sendReply(id, "Ola!");
 				}
 				else this.sendReply(id, "Não entendi sua mensagem, pode tentar de outra maneira?");
@@ -65,7 +63,6 @@ public class WebHook {
 		response.getMessage().put("text", text);
 		HttpEntity<FacebookMessageResponse> entity = new HttpEntity<>(response);
 		String result = template.postForEntity(FB_MSG_URL, entity, String.class).getBody();
-		logger.info("Message result: {}", result);
 
 	}
 }
