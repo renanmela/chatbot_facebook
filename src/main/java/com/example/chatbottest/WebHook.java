@@ -1,5 +1,6 @@
 package com.example.chatbottest;
 
+import com.example.chatbottest.weather.WeatherWebHook;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -44,6 +45,12 @@ public class WebHook {
 				}
 				else if (regex.findMatcher(message, regex.getOi())){
 					this.sendReply(id, "Ola!");
+				}
+				else if (regex.findMatcher(message, regex.getClima())){
+					String getAll = "(?i).*clima [em|na|de|no]{2} (cidade de |munic[ií]pio de )*([A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+).*";
+					String nomeCidade = message.replaceAll(getAll, "$2");
+					WeatherWebHook weather = new WeatherWebHook(nomeCidade);
+					this.sendReply(id, weather.getWeather());
 				}
 				else this.sendReply(id, "Não entendi sua mensagem, pode tentar de outra maneira?");
 			}

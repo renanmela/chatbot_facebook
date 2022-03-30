@@ -7,7 +7,9 @@ public class Regex {
     private Matcher matcher;
     private String idade = "(?i)sua idade|(?i)(voc[eê] tem).*idade|(?i)idade.*(voc[eê] tem)|(?i)(voc[eê] tem).*anos|(?i)anos.*(tem voc[eê])|(?i)anos.*(voc[eê] tem)";
     private String nome = "(?i)seu nome|(?i)voc[eê]\\sse\\schama|(?i)nome\\s(tem\\s)voc[eê]|(?i)nome\\svoc[eê]\\stem";
-    private String oi = "\"(?i)oi|(?i)ol[aá]|(?i)esta\\\\sai?\"";
+    private String oi = "(?i)oi|(?i)ol[aá]|(?i)esta ai?";
+    private String clima = "(?i)clima [em|na|de|no]{2} (cidade de |munic[ií]pio de )*([A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+)?";
+
 
     public boolean findMatcher(String message, String regex) {
         this.matcher = Pattern.compile(regex).matcher(message);
@@ -17,9 +19,7 @@ public class Regex {
         return false;
     }
 
-    public String getIdade() {
-        return idade;
-    }
+    public String getIdade() { return idade; }
 
     public String getNome() {
         return nome;
@@ -28,4 +28,6 @@ public class Regex {
     public String getOi() {
         return oi;
     }
+
+    public String getClima() { return clima; }
 }
