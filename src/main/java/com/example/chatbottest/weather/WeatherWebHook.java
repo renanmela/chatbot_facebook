@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-@RestController()
 @RequestMapping("weather")
 public class WeatherWebHook {
 	private final String PAGE_TOKEN = "8c1b7ca5";
