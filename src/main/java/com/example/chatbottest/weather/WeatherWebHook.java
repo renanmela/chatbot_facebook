@@ -1,9 +1,13 @@
 package com.example.chatbottest.weather;
 
 import com.example.chatbottest.*;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 @RequestMapping("weather")
 public class WeatherWebHook {
@@ -17,31 +21,23 @@ public class WeatherWebHook {
 		this.city_name = city_name;
 	}
 
-	@GetMapping()
-	@ResponseStatus(HttpStatus.OK)
-	public String get(@RequestParam(name = "results") String request) {
-		return request;
-	}
-
-	@PostMapping
-	@ResponseStatus(HttpStatus.OK)
-	public void post(@RequestBody WeatherResults request) {
-		for (WeatherForecast f : request.getForecast()) {
-			String city_name = request.getCity_name();
-			String date = f.getDate();
-			String description = request.getDescription();
-			int max = f.getMax();
-			int min = f.getMin();
-			this.weather = construct(city_name, date, description, max, min);
-		}
-	}
-
 	public String construct(String city, String date, String description, int max, int min) {
-		return "O clima em " + city + " na data " + date + " é:\n" + description + " com temperaturas entre: " + max + " e " + min;
+		weather = "O clima em " + city + " na data " + date + " é:\n" + description + " com temperaturas entre: " + max + " e " + min;
+		return weather;
 	}
 
 	public String getWeather() {
-		return weather;
+		ResponseEntity<WeatherResults> entity = template.getForEntity(WEATHER_URL, WeatherResults.class);
+		String result = "Desculpe não encontrei";
+		for (WeatherForecast wf : entity.getBody().getForecast()) {
+			String city = entity.getBody().getCity_name();
+			String date = wf.getDate();
+			String description = entity.getBody().getDescription();
+			int max = wf.getMax();
+			int min = wf.getMin();
+			result = construct(city, date, description, max, min);
+		}
+		return result;
 	}
 }
 
