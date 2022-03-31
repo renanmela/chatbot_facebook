@@ -9,7 +9,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-@RequestMapping("weather")
 public class WeatherWebHook {
 	private final String PAGE_TOKEN = "2e03e1c9";
 	private final String WEATHER_URL="https://api.hgbrasil.com/weather?array_limit=1&fields=only_results,temp,description,city_name,forecast,max,min,date&key=" + PAGE_TOKEN + "&city_name=";
