@@ -50,7 +50,7 @@ public class WebHook {
 					String pegaTudo = "(?i).*clima [em|na|de|no]{2} (cidade de |munic[ií]pio de )*([A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+).*";
 					String nomeCidade = message.replaceAll(pegaTudo, "$2");
 					WeatherWebHook weather = new WeatherWebHook();
-					this.sendReply(id, weather.getWeather(nomeCidade.replaceAll(" ", "")));
+					this.sendReply(id, weather.getWeather(nomeCidade.replaceAll(" ", "")+",RS"));
 				}
 				else this.sendReply(id, "Não entendi sua mensagem, pode tentar de outra maneira?");
 			}
