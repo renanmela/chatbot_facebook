@@ -17,7 +17,7 @@ public class WeatherWebHook {
 	private final RestTemplate template = new RestTemplate();
 
 	public String construct(String city, String date, String description, int max, int min) {
-		weather = "O clima em " + city + " na data " + date + " é:\n" + description + " com temperaturas entre: " + max + "C e " + min + "C";
+		weather = "O clima em " + city + " na data " + date + " é:\n" + description + " com  temperaturas entre: " + max + "C e " + min + "C";
 		return weather;
 	}
 
