@@ -12,22 +12,17 @@ import java.util.List;
 @RequestMapping("weather")
 public class WeatherWebHook {
 	private final String PAGE_TOKEN = "8c1b7ca5";
-	private String city_name;
-	private final String WEATHER_URL="https://api.hgbrasil.com/weather?array_limit=1&fields=only_results,temp,description,city_name,forecast,max,min,date&key=" + PAGE_TOKEN + "&" + city_name;
+	private final String WEATHER_URL="https://api.hgbrasil.com/weather?array_limit=1&fields=only_results,temp,description,city_name,forecast,max,min,date&key=" + PAGE_TOKEN + "&";
 	private String weather;
 	private final RestTemplate template = new RestTemplate();
 
-	public WeatherWebHook(String city_name){
-		this.city_name = city_name;
-	}
-
 	public String construct(String city, String date, String description, int max, int min) {
-		weather = "O clima em " + city + " na data " + date + " é:\n" + description + " com temperaturas entre: " + max + " e " + min;
+		weather = "O clima em " + city + " na data " + date + " é:\n" + description + " com temperaturas entre: " + max + "oC e " + min + "oC";
 		return weather;
 	}
 
-	public String getWeather() {
-		ResponseEntity<WeatherResults> entity = template.getForEntity(WEATHER_URL, WeatherResults.class);
+	public String getWeather(String city_name) {
+		ResponseEntity<WeatherResults> entity = template.getForEntity(WEATHER_URL+city_name, WeatherResults.class);
 		String result = "Desculpe não encontrei";
 		for (WeatherForecast wf : entity.getBody().getForecast()) {
 			String city = entity.getBody().getCity_name();
