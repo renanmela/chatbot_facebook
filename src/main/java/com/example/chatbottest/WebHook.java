@@ -46,11 +46,6 @@ public class WebHook {
 				else if (regex.findMatcher(message, regex.getOi())){
 					this.sendReply(id, "Ola!");
 				}
-				else if (regex.findMatcher(message, regex.getClima())){
-					String nomeCidade = message.replaceAll(regex.getAll(), "$2");
-					WeatherWebHook weather = new WeatherWebHook();
-					this.sendReply(id, weather.getWeather(nomeCidade));
-				}
 				else this.sendReply(id, "Não entendi sua mensagem, pode tentar de outra maneira?");
 			}
 		}
