@@ -14,4 +14,8 @@ import lombok.ToString;
 public class FacebookMessage implements Serializable {
     private String mid;
     private String text;
+	
+    public String getText() {
+		return text;
+	}
 }
