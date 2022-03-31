@@ -23,16 +23,16 @@ public class WeatherWebHook {
 
 	public String getWeather(String city_name) {
 		ResponseEntity<WeatherResults> entity = template.getForEntity(WEATHER_URL+city_name, WeatherResults.class);
-		String clima = "Desculpe não encontrei";
+		String result = "Desculpe não encontrei";
 		for (WeatherForecast wf : entity.getBody().getForecast()) {
 			String city = entity.getBody().getCity_name();
 			String date = wf.getDate();
 			String description = entity.getBody().getDescription();
 			int max = wf.getMax();
 			int min = wf.getMin();
-			clima = construct(city, date, description, max, min);
+			result = construct(city, date, description, max, min);
 		}
-		return clima;
+		return result;
 	}
 }
 
