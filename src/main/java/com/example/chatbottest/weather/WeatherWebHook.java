@@ -12,7 +12,7 @@ import java.util.List;
 @RequestMapping("weather")
 public class WeatherWebHook {
 	private final String PAGE_TOKEN = "2e03e1c9";
-	private final String WEATHER_URL="https://api.hgbrasil.com/weather?array_limit=10&fields=only_results,temp,description,city_name,forecast,max,min,date&key=" + PAGE_TOKEN + "&";
+	private final String WEATHER_URL="https://api.hgbrasil.com/weather?array_limit=1&fields=only_results,temp,description,city_name,forecast,max,min,date&key=" + PAGE_TOKEN + "&";
 	private String weather;
 	private final RestTemplate template = new RestTemplate();
 
