@@ -19,6 +19,8 @@ public class Regex {
         return false;
     }
 
+    public String getAll() { return ".+"; }
+
     public String getIdade() { return idade; }
 
     public String getNome() {

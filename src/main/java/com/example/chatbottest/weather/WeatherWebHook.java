@@ -11,28 +11,28 @@ import java.util.List;
 
 @RequestMapping("weather")
 public class WeatherWebHook {
-	private final String PAGE_TOKEN = "8c1b7ca5";
-	private final String WEATHER_URL="https://api.hgbrasil.com/weather?array_limit=1&fields=only_results,temp,description,city_name,forecast,max,min,date&key=" + PAGE_TOKEN + "&";
+	private final String PAGE_TOKEN = "2e03e1c9";
+	private final String WEATHER_URL="https://api.hgbrasil.com/weather?fields=only_results,temp,description,city_name,forecast,max,min,date&key=" + PAGE_TOKEN + "&";
 	private String weather;
 	private final RestTemplate template = new RestTemplate();
 
 	public String construct(String city, String date, String description, int max, int min) {
-		weather = "O clima em " + city + " na data " + date + " é:\n" + description + " com temperaturas entre: " + max + "oC e " + min + "oC";
+		weather = "O clima em " + city + " na data " + date + " é:\n" + description + " com temperaturas entre: " + max + "C e " + min + "C";
 		return weather;
 	}
 
 	public String getWeather(String city_name) {
 		ResponseEntity<WeatherResults> entity = template.getForEntity(WEATHER_URL+city_name, WeatherResults.class);
-		String result = "Desculpe não encontrei";
+		String clima = "Desculpe não encontrei";
 		for (WeatherForecast wf : entity.getBody().getForecast()) {
 			String city = entity.getBody().getCity_name();
 			String date = wf.getDate();
 			String description = entity.getBody().getDescription();
 			int max = wf.getMax();
 			int min = wf.getMin();
-			result = construct(city, date, description, max, min);
+			clima = construct(city, date, description, max, min);
 		}
-		return result;
+		return clima;
 	}
 }
 
