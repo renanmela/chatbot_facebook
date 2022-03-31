@@ -25,7 +25,7 @@ public class WeatherWebHook {
 		ResponseEntity<WeatherResults> entity = template.getForEntity(WEATHER_URL+city_name, WeatherResults.class);
 		String result = "Desculpe não encontrei";
 		for (WeatherForecast wf : entity.getBody().getForecast()) {
-			String city = city_name;
+			String city = entity.getBody().getCity_name();
 			String date = wf.getDate();
 			String description = entity.getBody().getDescription();
 			int max = wf.getMax();
