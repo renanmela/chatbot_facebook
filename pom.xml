@@ -12,20 +12,16 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>chatbot-test</name>
 	<description>Demo project for Spring Boot</description>
-<<<<<<< HEAD
-=======
 	<properties>
 	<maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
 		<java.version>11</java.version>
 	</properties>
->>>>>>> 955fcf9cc52ab2faa4661f3ebe37c1d88399dc07
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -42,7 +38,6 @@
 			<artifactId>maven-compiler-plugin</artifactId>
 			<version>3.8.1</version>
 		</dependency>
-
 	</dependencies>
 
 	<build>
@@ -61,5 +56,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
